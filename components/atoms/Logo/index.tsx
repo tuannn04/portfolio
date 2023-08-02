@@ -1,5 +1,3 @@
-'use client'
-
 import React from 'react';
 import Image from 'next/image';
 
@@ -14,9 +12,13 @@ const Logo = function ({src, alt, ...restProps}: LogoProps) {
     );
 }
 
-const DefaultLogo = function (props: LogoProps) {
+const DefaultLogo = function ({...restProps}: LogoProps) {
     return (
-        <div {...props}>Logo</div>
+        <div className={"w-16 h-16 rounded-full border-2"}>
+            <div className={"w-full h-full text-2xl font-thin flex items-center justify-center cursor-default"}>
+                {process.env.NEXT_PUBLIC_FULL_NAME_ABBREVIATION}
+            </div>
+        </div>
     )
 }
 

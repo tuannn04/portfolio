@@ -1,25 +1,28 @@
 'use client'
 
-import React from "react";
+import React, {memo, ReactNode} from "react";
 import Logo from "@/components/atoms/Logo";
 import NavBar from "@/components/molecules/NavBar";
 import {NavLinkProps} from "@/components/atoms/NavLink";
-import DefaultHeaderItems from "@/components/organisms/Header/headerItems";
+import {DefaultNavItems, useNavItems} from "@/components/organisms/Header/headerItems";
 
 export type HeaderProps = {
     className?: string,
-    navItems?: NavLinkProps[],
     logoSrc?: string
     socialItems?: NavLinkProps[]
 }
 
-const Header = function ({className, navItems, logoSrc, socialItems}: HeaderProps) {
-    const defaultNavItems = DefaultHeaderItems;
+const Header = ({className, logoSrc, socialItems}: HeaderProps): ReactNode => {
+    const navItems = useNavItems();
+
     return (
-        <header className={className}>
-            <NavBar items={defaultNavItems}/>
-            <Logo src={logoSrc}/>
-            <NavBar items={socialItems || []}/>
+        <header className={"h-16 flex"}>
+            <div className={"w-[calc((100vw_-_4rem)/2)]"}>
+                <NavBar items={navItems}/>
+            </div>
+            <div>
+                <Logo src={logoSrc}/>
+            </div>
         </header>
     );
 }
